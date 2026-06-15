@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LOL-ITA — Adelaide DJ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Share+Tech+Mono&family=Barlow:wght@400;600;700;900&family=Barlow+Condensed:wght@700;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --hot-pink: #FF2D8A;
+      --neon-pink: #FF5EC4;
+      --acid-green: #C1FF00;
+      --black: #050505;
+      --near-black: #0D0D0D;
+      --dark-grey: #1A1A1A;
+      --white: #FFFFFF;
+      --pink-glow: rgba(255, 45, 138, 0.35);
+      --green-glow: rgba(193, 255, 0, 0.3);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ─── SCANLINE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0,0,0,0.07) 2px,
+        rgba(0,0,0,0.07) 4px
+      );
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 40px;
+      background: rgba(5,5,5,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--hot-pink);
+    }
+
+    .nav-logo {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.05em;
+      color: var(--hot-pink);
+      text-shadow: 0 0 18px var(--hot-pink), 0 0 40px var(--hot-pink);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--acid-green); }
+
+    .nav-cta {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--hot-pink);
+      color: var(--black);
+      border: none;
+      padding: 9px 22px;
+      cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--acid-green);
+      box-shadow: 0 0 20px var(--acid-green);
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(5,5,5,0.1) 0%,
+        rgba(5,5,5,0.05) 40%,
+        rgba(5,5,5,0.7) 75%,
+        rgba(5,5,5,1) 100%
+      );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 60px 60px;
+      max-width: 800px;
+    }
+
+    .hero-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--acid-green);
+      display: inline-block;
+      border: 1px solid var(--acid-green);
+      padding: 4px 12px;
+      margin-bottom: 16px;
+    }
+
+    .hero-name {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: clamp(5rem, 14vw, 11rem);
+      line-height: 0.9;
+      color: var(--hot-pink);
+      text-shadow:
+        0 0 30px var(--hot-pink),
+        0 0 80px rgba(255,45,138,0.5),
+        4px 4px 0 #8B0051,
+        6px 6px 0 #500030;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-sub {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-top: 10px;
+      opacity: 0.8;
+    }
+
+    .hero-scroll {
+      margin-top: 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .hero-scroll span {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--hot-pink);
+    }
+
+    .scroll-line {
+      width: 60px;
+      height: 1px;
+      background: var(--hot-pink);
+      box-shadow: 0 0 8px var(--hot-pink);
+    }
+
+    /* ─── TICKER ─── */
+    .ticker-wrap {
+      width: 100%;
+      background: var(--hot-pink);
+      overflow: hidden;
+      padding: 10px 0;
+      border-top: 1px solid #FF80C8;
+      border-bottom: 1px solid #FF80C8;
+    }
+
+    .ticker-track {
+      display: flex;
+      gap: 0;
+      animation: ticker 22s linear infinite;
+      white-space: nowrap;
+    }
+
+    .ticker-item {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--black);
+      padding: 0 32px;
+      flex-shrink: 0;
+    }
+
+    .ticker-item::after { content: ' ✦ '; }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ─── SECTIONS ─── */
+    section { padding: 100px 40px; }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-eyebrow {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--acid-green);
+      margin-bottom: 16px;
+    }
+
+    .section-heading {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    /* ─── ABOUT ─── */
+    #about .section-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-image-wrap {
+      position: relative;
+    }
+
+    .about-img {
+      width: 100%;
+      display: block;
+      border: 2px solid var(--hot-pink);
+      box-shadow: 0 0 40px var(--pink-glow), 0 0 80px rgba(255,45,138,0.15);
+    }
+
+    .about-img-accent {
+      position: absolute;
+      bottom: -16px;
+      right: -16px;
+      width: 100%;
+      height: 100%;
+      border: 2px solid var(--acid-green);
+      z-index: -1;
+    }
+
+    .about-text {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .about-body {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.75);
+      font-weight: 400;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .pill {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid var(--hot-pink);
+      color: var(--hot-pink);
+      clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+    }
+
+    .pill.green {
+      border-color: var(--acid-green);
+      color: var(--acid-green);
+    }
+
+    /* ─── GIGS ─── */
+    #gigs {
+      background: var(--near-black);
+      border-top: 1px solid #1f1f1f;
+      border-bottom: 1px solid #1f1f1f;
+    }
+
+    .gigs-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .gig-card {
+      background: var(--dark-grey);
+      border: 1px solid #2a2a2a;
+      padding: 32px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .gig-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+      background: var(--hot-pink);
+      box-shadow: 0 0 12px var(--hot-pink);
+    }
+
+    .gig-card.green::before {
+      background: var(--acid-green);
+      box-shadow: 0 0 12px var(--acid-green);
+    }
+
+    .gig-card:hover {
+      border-color: var(--hot-pink);
+      box-shadow: 0 0 30px var(--pink-glow);
+    }
+
+    .gig-card.green:hover {
+      border-color: var(--acid-green);
+      box-shadow: 0 0 30px var(--green-glow);
+    }
+
+    .gig-status {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--hot-pink);
+      margin-bottom: 12px;
+    }
+
+    .gig-card.green .gig-status { color: var(--acid-green); }
+
+    .gig-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .gig-detail {
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ─── TRACKLIST ─── */
+    #sound .section-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .tracklist {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 40px;
+      border: 1px solid #222;
+      background: var(--near-black);
+    }
+
+    .track-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding: 18px 24px;
+      border-bottom: 1px solid #1e1e1e;
+      transition: background 0.2s;
+      cursor: default;
+    }
+
+    .track-item:last-child { border-bottom: none; }
+    .track-item:hover { background: rgba(255,45,138,0.05); }
+
+    .track-num {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--hot-pink);
+      width: 20px;
+      flex-shrink: 0;
+    }
+
+    .track-play {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--hot-pink);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.6rem;
+      color: var(--hot-pink);
+      transition: background 0.2s;
+    }
+
+    .track-item:hover .track-play {
+      background: var(--hot-pink);
+      color: var(--black);
+    }
+
+    .track-info { flex: 1; }
+
+    .track-artist {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .track-song {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.45);
+      margin-top: 2px;
+    }
+
+    .track-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--acid-green);
+      opacity: 0.7;
+    }
+
+    .sound-image-wrap {
+      position: relative;
+    }
+
+    .sound-img {
+      width: 100%;
+      display: block;
+    }
+
+    .sound-img-frame {
+      position: absolute;
+      inset: -12px;
+      border: 1px solid var(--acid-green);
+      z-index: -1;
+      opacity: 0.4;
+    }
+
+    /* ─── BOOKING ─── */
+    #booking {
+      background: var(--near-black);
+      border-top: 1px solid #1a1a1a;
+    }
+
+    #booking .section-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .booking-intro {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.65);
+      margin-top: 24px;
+    }
+
+    .booking-email-block {
+      margin-top: 32px;
+      background: var(--dark-grey);
+      border: 1px solid #2a2a2a;
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .booking-email-icon {
+      font-size: 1.2rem;
+      color: var(--hot-pink);
+    }
+
+    .booking-email-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 4px;
+    }
+
+    .booking-email-addr {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--white);
+    }
+
+    /* ─── BOOKING FORM ─── */
+    .booking-form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      background: var(--dark-grey);
+      border: 1px solid #2a2a2a;
+      color: var(--white);
+      font-family: 'Barlow', sans-serif;
+      font-size: 0.9rem;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--hot-pink);
+      box-shadow: 0 0 12px rgba(255,45,138,0.2);
+    }
+
+    .form-group textarea { resize: vertical; min-height: 100px; }
+
+    .form-group select option { background: var(--dark-grey); }
+
+    .btn-submit {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: var(--hot-pink);
+      color: var(--black);
+      border: none;
+      padding: 16px 32px;
+      cursor: pointer;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+      transition: background 0.2s, box-shadow 0.2s;
+      width: 100%;
+      margin-top: 8px;
+    }
+
+    .btn-submit:hover {
+      background: var(--acid-green);
+      box-shadow: 0 0 30px var(--acid-green);
+    }
+
+    .form-note {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.1em;
+      text-align: center;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 48px 40px;
+      border-top: 1px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .footer-logo {
+      font-family: 'Black Han Sans', sans-serif;
+      font-size: 1.8rem;
+      color: var(--hot-pink);
+      text-shadow: 0 0 20px var(--hot-pink);
+      text-decoration: none;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--hot-pink); }
+
+    .footer-ig {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--white);
+      text-decoration: none;
+      border: 1px solid #2a2a2a;
+      padding: 10px 18px;
+      transition: border-color 0.2s;
+    }
+
+    .footer-ig:hover { border-color: var(--hot-pink); color: var(--hot-pink); }
+
+    .footer-ig-icon {
+      font-size: 1rem;
+    }
+
+    /* ─── DIVIDER ─── */
+    .pink-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--hot-pink);
+      box-shadow: 0 0 10px var(--hot-pink);
+      margin: 20px 0 32px;
+    }
+
+    /* ─── RESPONSE MSG ─── */
+    .form-response {
+      display: none;
+      padding: 14px 20px;
+      background: rgba(193,255,0,0.1);
+      border: 1px solid var(--acid-green);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--acid-green);
+      text-align: center;
+    }
+
+    /* ─── MOBILE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 12px 20px; }
+      .nav-links { display: none; }
+      section { padding: 70px 24px; }
+      #about .section-inner,
+      #sound .section-inner,
+      #booking .section-inner { grid-template-columns: 1fr; gap: 40px; }
+      .gigs-grid { grid-template-columns: 1fr; }
+      .hero-content { padding: 0 24px 48px; }
+      .hero-name { font-size: clamp(4rem, 20vw, 7rem); }
+      footer { flex-direction: column; align-items: flex-start; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-track { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo">LOL-ITA</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gigs">Gigs</a></li>
+      <li><a href="#sound">Sound</a></li>
+      <li><a href="#booking">Bookings</a></li>
+    </ul>
+    <a href="#booking"><button class="nav-cta">Book Now</button></a>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <img src="Cover.png" alt="LOL-ITA — Adelaide DJ" class="hero-img" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-tag">▶ Now Playing — High Octane Energy</span>
+      <h1 class="hero-name">LOL-ITA</h1>
+      <p class="hero-sub">Adelaide-Based DJ &nbsp;✦&nbsp; High-Octane Rave &nbsp;✦&nbsp; Classic House &nbsp;✦&nbsp; 90s Breakbeat</p>
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        <span>Scroll to explore</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap" aria-hidden="true">
+    <div class="ticker-track">
+      <!-- doubled for seamless loop -->
+      <span class="ticker-item">High-Octane Rave</span>
+      <span class="ticker-item">Classic House</span>
+      <span class="ticker-item">90s Breakbeat</span>
+      <span class="ticker-item">Vocal Dance Anthems</span>
+      <span class="ticker-item">Your Shot Adelaide 2026</span>
+      <span class="ticker-item">Thursdays @ Nevermind</span>
+      <span class="ticker-item">Rave More Worry Less</span>
+      <span class="ticker-item">LOL-ITA</span>
+      <span class="ticker-item">High-Octane Rave</span>
+      <span class="ticker-item">Classic House</span>
+      <span class="ticker-item">90s Breakbeat</span>
+      <span class="ticker-item">Vocal Dance Anthems</span>
+      <span class="ticker-item">Your Shot Adelaide 2026</span>
+      <span class="ticker-item">Thursdays @ Nevermind</span>
+      <span class="ticker-item">Rave More Worry Less</span>
+      <span class="ticker-item">LOL-ITA</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-image-wrap">
+        <img src="Body2.png" alt="LOL-ITA at the decks" class="about-img" />
+        <div class="about-img-accent"></div>
+      </div>
+      <div class="about-text">
+        <div>
+          <p class="section-eyebrow">// 001 — About</p>
+          <h2 class="section-heading">New name.<br>Same obsession.</h2>
+          <div class="pink-divider"></div>
+        </div>
+        <p class="about-body">
+          Adelaide-based DJ LOL-ITA is bringing a high-energy fusion of iconic electronic anthems and modern club heaters to the local scene. Seamlessly blending nostalgia with cutting-edge production, her sound spans from the gritty, explosive energy of 90s breakbeat and rave classics to infectious house vocals and driving electronic rhythms.
+        </p>
+        <p class="about-body">
+          Currently making waves as part of the Your Shot 2026 lineup and gearing up to take over Thursdays at Adelaide's own Nevermind, LOL-ITA is a rising force to watch behind the decks.
+        </p>
+        <div class="pill-row">
+          <span class="pill">High-Octane Rave</span>
+          <span class="pill">Classic House</span>
+          <span class="pill green">90s Breakbeat</span>
+          <span class="pill green">Vocal Dance Anthems</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIGS -->
+  <section id="gigs">
+    <div class="section-inner">
+      <p class="section-eyebrow">// 002 — Upcoming</p>
+      <h2 class="section-heading">On the decks</h2>
+      <div class="pink-divider"></div>
+      <div class="gigs-grid">
+        <div class="gig-card">
+          <p class="gig-status">★ Official Contestant</p>
+          <h3 class="gig-title">Your Shot Adelaide 2026</h3>
+          <p class="gig-detail">Adelaide's premier DJ competition — LOL-ITA is in the mix.</p>
+        </div>
+        <div class="gig-card green">
+          <p class="gig-status">◎ Upcoming Residency</p>
+          <h3 class="gig-title">Thursdays @ Nevermind Nightclub</h3>
+          <p class="gig-detail">Taking over the Thursday night slot at Adelaide's Nevermind. Come through.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOUND / TRACKLIST -->
+  <section id="sound">
+    <div class="section-inner">
+      <div>
+        <p class="section-eyebrow">// 003 — The Sound</p>
+        <h2 class="section-heading">The vibe in rotation</h2>
+        <div class="pink-divider"></div>
+        <div class="tracklist">
+          <div class="track-item">
+            <span class="track-num">01</span>
+            <div class="track-play">▶</div>
+            <div class="track-info">
+              <div class="track-artist">The Prodigy</div>
+              <div class="track-song">Breathe / No Good / Smack My Bitch Up</div>
+            </div>
+            <span class="track-tag">Rave</span>
+          </div>
+          <div class="track-item">
+            <span class="track-num">02</span>
+            <div class="track-play">▶</div>
+            <div class="track-info">
+              <div class="track-artist">Crystal Waters</div>
+              <div class="track-song">Gypsy Woman / 100% Pure Love</div>
+            </div>
+            <span class="track-tag">House</span>
+          </div>
+          <div class="track-item">
+            <span class="track-num">03</span>
+            <div class="track-play">▶</div>
+            <div class="track-info">
+              <div class="track-artist">Bomfunk MC's</div>
+              <div class="track-song">Freestyler</div>
+            </div>
+            <span class="track-tag">Breakbeat</span>
+          </div>
+          <div class="track-item">
+            <span class="track-num">04</span>
+            <div class="track-play">▶</div>
+            <div class="track-info">
+              <div class="track-artist">Everything But The Girl</div>
+              <div class="track-song">Missing — Todd Terry Remix</div>
+            </div>
+            <span class="track-tag">Vocal</span>
+          </div>
+          <div class="track-item">
+            <span class="track-num">05</span>
+            <div class="track-play">▶</div>
+            <div class="track-info">
+              <div class="track-artist">Calvin Harris</div>
+              <div class="track-song">How Deep Is Your Love</div>
+            </div>
+            <span class="track-tag">House</span>
+          </div>
+        </div>
+      </div>
+      <div class="sound-image-wrap">
+        <img src="Body1.png" alt="LOL-ITA — DJ set" class="sound-img" />
+        <div class="sound-img-frame"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking">
+    <div class="section-inner">
+      <div>
+        <p class="section-eyebrow">// 004 — Bookings</p>
+        <h2 class="section-heading">Book LOL-ITA</h2>
+        <div class="pink-divider"></div>
+        <p class="booking-intro">
+          Looking to bring LOL-ITA to your night? Whether it's a club residency, private event, or festival stage — get in touch and let's make it happen.
+        </p>
+        <div class="booking-email-block">
+          <span class="booking-email-icon">✉</span>
+          <div>
+            <div class="booking-email-label">Direct Email</div>
+            <a href="mailto:lola.sawa@icloud.com" class="booking-email-addr">lola.sawa@icloud.com</a>
+          </div>
+        </div>
+        <div style="margin-top: 24px;">
+          <a href="https://instagram.com/lolasawa.2020" target="_blank" rel="noopener" style="display:inline-flex; align-items:center; gap:10px; font-family:'Share Tech Mono',monospace; font-size:0.78rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--hot-pink); text-decoration:none; border:1px solid var(--hot-pink); padding:12px 20px; transition:box-shadow 0.2s;" onmouseover="this.style.boxShadow='0 0 20px rgba(255,45,138,0.4)'" onmouseout="this.style.boxShadow='none'">
+            ◈ &nbsp;@lolasawa.2020
+          </a>
+        </div>
+      </div>
+
+      <!-- BOOKING FORM -->
+      <div>
+        <form class="booking-form" id="bookingForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">Name</label>
+              <input type="text" id="fname" name="name" placeholder="Your name" required />
+            </div>
+            <div class="form-group">
+              <label for="femail">Email</label>
+              <input type="email" id="femail" name="email" placeholder="your@email.com" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fdate">Event Date</label>
+              <input type="date" id="fdate" name="date" />
+            </div>
+            <div class="form-group">
+              <label for="ftype">Event Type</label>
+              <select id="ftype" name="type">
+                <option value="">Select type</option>
+                <option>Club Night</option>
+                <option>Private Event</option>
+                <option>Festival</option>
+                <option>Other</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="fmsg">Message</label>
+            <textarea id="fmsg" name="message" placeholder="Tell me about your event…"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Send Booking Request ▶</button>
+          <div class="form-response" id="formResponse">
+            ✔ Request received — Lola will be in touch soon.
+          </div>
+          <p class="form-note">Requests sent to lola.sawa@icloud.com</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#hero" class="footer-logo">LOL-ITA</a>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#gigs">Gigs</a></li>
+      <li><a href="#sound">Sound</a></li>
+      <li><a href="#booking">Bookings</a></li>
+    </ul>
+    <a href="https://instagram.com/lolasawa.2020" target="_blank" rel="noopener" class="footer-ig">
+      <span class="footer-ig-icon">◈</span>
+      @lolasawa.2020
+    </a>
+  </footer>
+
+  <script>
+    // Booking form — mailto fallback (works without a backend)
+    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = new FormData(this);
+      const name = data.get('name') || '';
+      const email = data.get('email') || '';
+      const date = data.get('date') || 'TBD';
+      const type = data.get('type') || 'Not specified';
+      const message = data.get('message') || '';
+
+      const subject = encodeURIComponent(`Booking Request — ${type} on ${date}`);
+      const body = encodeURIComponent(
+        `Hi Lola,\n\nI'd like to book LOL-ITA.\n\nName: ${name}\nEmail: ${email}\nDate: ${date}\nEvent Type: ${type}\n\n${message}\n\nThanks!`
+      );
+
+      window.location.href = `mailto:lola.sawa@icloud.com?subject=${subject}&body=${body}`;
+
+      // Show success message
+      const resp = document.getElementById('formResponse');
+      resp.style.display = 'block';
+      setTimeout(() => { resp.style.display = 'none'; }, 6000);
+    });
+
+    // Smooth active nav highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 80) current = s.id;
+      });
+      navLinks.forEach(a => {
+        a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--acid-green)' : '';
+      });
+    });
+  </script>
+</body>
+</html>
